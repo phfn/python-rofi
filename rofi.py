@@ -462,7 +462,7 @@ class Rofi(object):
         return index, key
 
 
-    def generic_entry(self, prompt, validator=None, message=None, rofi_args=None, **kwargs):
+    def generic_entry(self, prompt, validator=None, message=None, rofi_args=None, options=None, **kwargs):
         """A generic entry box.
 
         Parameters
@@ -481,6 +481,11 @@ class Rofi(object):
             user entered is returned as-is.
         message: string
             Optional message to display under the entry.
+        options: list of strings, optional
+            A list of options they can choose from. Any newline characters are
+            replaced with spaces. The user can either select one of the options,
+            in which case the selected option is returned, or enter their own string.
+            If not given, no options are suggested.
 
         Returns
         -------
@@ -517,7 +522,7 @@ class Rofi(object):
             args.extend(rofi_args)
 
             # Run it.
-            returncode, stdout = self._run_blocking(args, input="")
+            returncode, stdout = self._run_blocking(args, input='\n'.join(options) if options else '')
 
             # Was the dialog cancelled?
             if returncode == 1:
@@ -534,7 +539,7 @@ class Rofi(object):
 
 
     def text_entry(self, prompt, message=None, allow_blank=False, strip=True,
-            rofi_args=None, **kwargs):
+            rofi_args=None, options=None, **kwargs):
         """Prompt the user to enter a piece of text.
 
         Parameters
@@ -548,6 +553,11 @@ class Rofi(object):
         strip: Boolean
             Whether to strip leading and trailing whitespace from the entered
             value.
+        options: list of strings, optional
+            A list of options they can choose from. Any newline characters are
+            replaced with spaces. The user can either select one of the options,
+            in which case the selected option is returned, or enter their own string.
+            If not given, no options are suggested.
 
         Returns
         -------
@@ -563,7 +573,7 @@ class Rofi(object):
 
             return text, None
 
-        return self.generic_entry(prompt, text_validator, message, rofi_args, **kwargs)
+        return self.generic_entry(prompt, text_validator, message, rofi_args, options, **kwargs)
 
 
     def integer_entry(self, prompt, message=None, min=None, max=None, rofi_args=None, **kwargs):
