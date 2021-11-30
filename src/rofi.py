@@ -23,6 +23,11 @@
 # SOFTWARE.
 #
 
+"Create simple GUIs using the Rofi application"
+
+__version__ = "1.0.2"
+
+
 import atexit
 from datetime import datetime
 from decimal import Decimal, InvalidOperation
