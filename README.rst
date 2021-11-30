@@ -4,6 +4,10 @@ python-rofi
 
 A Python module to make simple GUIs using Rofi.
 
+Forked from https://github.com/bcbnz/python-rofi
+
+Availible on pip as python-rofi-phfn
+
 
 What is Rofi?
 =============
