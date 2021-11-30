@@ -847,6 +847,18 @@ class Rofi(object):
 
         return self.generic_entry(prompt, datetime_validator, message, rofi_args, **kwargs)
 
+    def message(self, message):
+        """Display a message to the user.
+
+        Parameters
+        ----------
+        message: string
+            The message to display.
+
+        """
+        args = ["rofi", "-e", message]
+        self._run_blocking(args)
+
 
     def exit_with_error(self, error, **kwargs):
         """Report an error and exit.
